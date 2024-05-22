@@ -12,10 +12,12 @@ import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name="users")
+@RequiredArgsConstructor
 @NoArgsConstructor(force=true, access=AccessLevel.PROTECTED)
 public class User {
 
