@@ -19,11 +19,10 @@ public class Task {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private final String title;
-	private final String description;
-	private final boolean finished;
+	private String title;
+	private String description;
+	private boolean finished;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private final User user;
-	
 }

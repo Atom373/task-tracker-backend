@@ -1,7 +1,6 @@
 package com.example.tasktracker.entity;
 
-import java.util.Set;
-
+import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,5 +27,5 @@ public class User {
 	private final String password;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Task> tasks;
+	private List<Task> tasks;
 }
