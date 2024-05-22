@@ -16,11 +16,11 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepo;
 	
 	@Override
-	public void save(User user) throws UserAlreadyExistsException {
+	public User save(User user) throws UserAlreadyExistsException {
 		if (userRepo.existsByEmail(user.getEmail())) {
 			throw new UserAlreadyExistsException("Эта почта уже используется");
 		}
-		userRepo.save(user);
+		return userRepo.save(user);
 	}
 
 	@Override

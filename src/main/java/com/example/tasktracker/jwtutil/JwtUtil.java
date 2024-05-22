@@ -1,4 +1,4 @@
-package com.example.tasktracker.jwtutils;
+package com.example.tasktracker.jwtutil;
 
 import java.time.Duration;
 import java.util.Date;
@@ -11,11 +11,9 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
-public class JwtUtils {
+public class JwtUtil {
 	
 	@Value("${jwt.secret}")
 	private String secret;
