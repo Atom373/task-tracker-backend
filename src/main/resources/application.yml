@@ -1,3 +1,7 @@
+jwt:
+  lifetime: 4h
+  secret: lajhdLKAJDHLkjh3-864kajshdljhgrlq-wdas1
+
 spring:
   application:
     name: task-tracker
