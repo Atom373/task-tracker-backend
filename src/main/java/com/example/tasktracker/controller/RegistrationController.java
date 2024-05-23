@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.tasktracker.dto.JwtResponseDto;
-import com.example.tasktracker.dto.RegistrationDto;
+import com.example.tasktracker.dto.RegistrationResponseDto;
+import com.example.tasktracker.dto.RegistrationRequestDto;
 import com.example.tasktracker.service.RegistrationServiceFacade;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ public class RegistrationController {
 	private RegistrationServiceFacade registrationService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<JwtResponseDto> register(@RequestBody RegistrationDto dto) {
+	public ResponseEntity<RegistrationResponseDto> register(@RequestBody RegistrationRequestDto dto) {
 		String jwt = registrationService.register(dto);
-		return ResponseEntity.ok(new JwtResponseDto(jwt));
+		return ResponseEntity.ok(new RegistrationResponseDto(jwt));
 	}
 }

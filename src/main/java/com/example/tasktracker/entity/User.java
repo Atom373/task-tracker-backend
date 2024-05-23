@@ -15,16 +15,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name="users")
-@RequiredArgsConstructor
-@NoArgsConstructor(force=true, access=AccessLevel.PROTECTED)
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 6317600995380184053L;
@@ -33,8 +28,8 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private final String email;
-	private final String password;
+	private String email;
+	private String password;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Task> tasks;

@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
 	public User findById(Long id) {
 		return userRepo.findById(id).orElseThrow( () -> new RuntimeException() );
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		return userRepo.findByEmail(email);
+	}
 }

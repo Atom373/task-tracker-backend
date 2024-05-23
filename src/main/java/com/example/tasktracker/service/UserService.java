@@ -8,4 +8,6 @@ public interface UserService {
 	User save(User user) throws UserAlreadyExistsException;
 	
 	User findById(Long id);
+	
+	User findByEmail(String email);
 }

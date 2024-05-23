@@ -3,7 +3,7 @@ package com.example.tasktracker.dto;
 import lombok.Data;
 
 @Data
-public class JwtRequestDto {
+public class AuthenticationRequestDto {
 
 	private String email;
 	private String password;
