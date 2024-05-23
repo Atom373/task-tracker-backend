@@ -9,7 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.example.tasktracker.entity.User;
 import com.example.tasktracker.jwtutil.JwtUtil;
+import com.example.tasktracker.service.UserService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -24,6 +26,7 @@ import lombok.AllArgsConstructor;
 public class JwtRequestFilter extends OncePerRequestFilter{
 
 	private JwtUtil jwtUtil;
+	private UserService userService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -42,8 +45,9 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 		}
 		
 		if (id != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+			User user = userService.findById(id);
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-					id, 
+					user, 
 					null,
 					List.of(new SimpleGrantedAuthority("ROLE_USER"))
 			);

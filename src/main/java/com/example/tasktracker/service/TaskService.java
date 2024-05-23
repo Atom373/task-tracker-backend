@@ -9,9 +9,13 @@ public interface TaskService {
 
 	List<Task> findAllByUser(User user);
 	
-	void save(Task task);
+	Task saveTaskWithTitle(String title, User user);
 	
-	void update(Task task);
+	void updateTitle(Long taskId, String title);
 	
-	void delete(Task task);
+	void updateDescription(Long taskId, String description);
+	
+	void updateState(Long taskId, Boolean state);
+	
+	void delete(Long taskId);
 }

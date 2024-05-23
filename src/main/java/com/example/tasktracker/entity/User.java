@@ -31,7 +31,7 @@ public class User implements UserDetails {
 	private String email;
 	private String password;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Task> tasks;
 
 	@Override

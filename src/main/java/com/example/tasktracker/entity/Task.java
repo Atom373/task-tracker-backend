@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@NoArgsConstructor(force=true, access=AccessLevel.PROTECTED)
 public class Task {
 
 	@Id
@@ -24,5 +23,5 @@ public class Task {
 	private boolean finished;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private final User user;
+	private User user;
 }
