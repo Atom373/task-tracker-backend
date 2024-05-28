@@ -7,15 +7,15 @@ import com.example.tasktracker.entity.User;
 
 public interface TaskService {
 
-	List<Task> findAllByUser(User user);
+	List<Task> findAllByUserId(Long userId);
 	
-	Task saveTaskWithTitle(String title, User user);
+	Task saveTaskWithTitle(String title, Long userId);
 	
 	void updateTitle(Long taskId, String title);
 	
 	void updateDescription(Long taskId, String description);
 	
-	void updateState(Long taskId, Boolean state);
+	void updateIsFinished(Long taskId, Boolean isFinished);
 	
 	void delete(Long taskId);
 }

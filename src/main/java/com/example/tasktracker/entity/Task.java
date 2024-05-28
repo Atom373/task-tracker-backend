@@ -20,7 +20,7 @@ public class Task {
 	
 	private String title;
 	private String description;
-	private boolean finished;
+	private Boolean isFinished;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)

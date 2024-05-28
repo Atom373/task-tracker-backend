@@ -25,15 +25,15 @@ public class TaskController {
 	private TaskService taskService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<List<Task>> getAllUserTasks(@AuthenticationPrincipal User user) {
-		List<Task> tasks = taskService.findAllByUser(user);
+	public ResponseEntity<List<Task>> getAllUserTasks(@AuthenticationPrincipal Long userId) {
+		List<Task> tasks = taskService.findAllByUserId(userId);
 		return ResponseEntity.ok(tasks);
 	}
 	
 	@PostMapping("/create")
 	public ResponseEntity<Long> saveTask(@RequestParam String title,
-										 @AuthenticationPrincipal User user) {
-		Task createdTask = taskService.saveTaskWithTitle(title, user);
+										 @AuthenticationPrincipal Long userId) {
+		Task createdTask = taskService.saveTaskWithTitle(title, userId);
 		return new ResponseEntity<>(createdTask.getId(), HttpStatus.CREATED);
 	}
 	
@@ -49,10 +49,10 @@ public class TaskController {
 		taskService.updateDescription(taskId, description);
 	}
 	
-	@PostMapping("/update/state")
+	@PostMapping("/update/isfinished")
 	public void updateState(@RequestParam Long taskId,
-							@RequestParam Boolean state) {
-		taskService.updateState(taskId, state);
+							@RequestParam Boolean isFinished) {
+		taskService.updateIsFinished(taskId, isFinished);
 	}
 	
 	@PostMapping("/delete")

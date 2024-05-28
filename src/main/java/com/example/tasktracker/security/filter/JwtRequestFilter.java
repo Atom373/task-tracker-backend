@@ -26,28 +26,26 @@ import lombok.AllArgsConstructor;
 public class JwtRequestFilter extends OncePerRequestFilter{
 
 	private JwtUtil jwtUtil;
-	private UserService userService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 				throws ServletException, IOException {
 		String authHeader = request.getHeader("Authorization");
 		String jwt = null;
-		Long id = null;
+		Long userId = null;
 		
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
 			jwt = authHeader.substring(7);
 			try {
-				id = jwtUtil.getIdFromToken(jwt);
+				userId = jwtUtil.getIdFromToken(jwt);
 			} catch (SignatureException | ExpiredJwtException ex) {
 				System.out.println("Error during jwt parsing " + ex.getMessage());
 			}
 		}
 		
-		if (id != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			User user = userService.findById(id);
+		if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-					user, 
+					userId, 
 					null,
 					List.of(new SimpleGrantedAuthority("ROLE_USER"))
 			);

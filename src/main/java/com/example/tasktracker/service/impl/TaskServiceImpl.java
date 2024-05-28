@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import com.example.tasktracker.entity.Task;
 import com.example.tasktracker.entity.User;
 import com.example.tasktracker.repository.TaskRepository;
+import com.example.tasktracker.repository.UserRepository;
 import com.example.tasktracker.service.TaskService;
+import com.example.tasktracker.service.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -16,17 +18,21 @@ import lombok.AllArgsConstructor;
 public class TaskServiceImpl implements TaskService {
 
 	private TaskRepository taskRepo;
+	private UserService userService;
 	
 	@Override
-	public List<Task> findAllByUser(User user) {
+	public List<Task> findAllByUserId(Long userId) {
+		User user = userService.findById(userId);
 		return taskRepo.findAllByUser(user);
 	}
 
 	@Override
-	public Task saveTaskWithTitle(String title, User user) {
-		Task task = new Task();
+	public Task saveTaskWithTitle(String title, Long userId) {
+		User user = userService.findById(userId);
 		
+		Task task = new Task();
 		task.setTitle(title);
+		task.setIsFinished(false);
 		task.setUser(user);
 		
 		return taskRepo.save(task);
@@ -52,10 +58,10 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public void updateState(Long taskId, Boolean state) {
+	public void updateIsFinished(Long taskId, Boolean isFinished) {
 		Task task = taskRepo.findById(taskId).orElseThrow( () -> new RuntimeException() );
 		
-		task.setFinished(state);
+		task.setIsFinished(isFinished);
 		
 		taskRepo.save(task);
 	}
