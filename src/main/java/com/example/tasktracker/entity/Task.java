@@ -25,4 +25,6 @@ public class Task {
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
+	
+	private Boolean isDeleted;
 }

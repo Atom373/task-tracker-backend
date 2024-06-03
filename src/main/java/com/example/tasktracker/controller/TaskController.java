@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tasktracker.entity.Task;
-import com.example.tasktracker.entity.User;
 import com.example.tasktracker.service.TaskService;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +43,7 @@ public class TaskController {
 	}
 	
 	@PostMapping("/update/description")
-	public void updatedescription(@RequestParam Long taskId, 
+	public void updateDescription(@RequestParam Long taskId, 
 								  @RequestParam String description) {
 		taskService.updateDescription(taskId, description);
 	}
@@ -57,7 +56,7 @@ public class TaskController {
 	
 	@PostMapping("/delete")
 	public void deleteTask(@RequestParam Long taskId) {
-		taskService.delete(taskId);
+		taskService.markAsDeleted(taskId);
 	}
 	
 }

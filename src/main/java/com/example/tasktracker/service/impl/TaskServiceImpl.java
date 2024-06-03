@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import com.example.tasktracker.entity.Task;
 import com.example.tasktracker.entity.User;
 import com.example.tasktracker.repository.TaskRepository;
-import com.example.tasktracker.repository.UserRepository;
 import com.example.tasktracker.service.TaskService;
 import com.example.tasktracker.service.UserService;
 
@@ -34,6 +33,7 @@ public class TaskServiceImpl implements TaskService {
 		task.setTitle(title);
 		task.setIsFinished(false);
 		task.setUser(user);
+		task.setIsDeleted(false);
 		
 		return taskRepo.save(task);
 	}
@@ -67,8 +67,16 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
+	public void markAsDeleted(Long taskId) {
+		Task task = taskRepo.findById(taskId).orElseThrow( () -> new RuntimeException() );
+		
+		task.setIsDeleted(true);
+		
+		taskRepo.save(task);
+	}
+	
+	@Override
 	public void delete(Long taskId) {
 		taskRepo.deleteById(taskId);
 	}
-
 }

@@ -3,7 +3,6 @@ package com.example.tasktracker.service;
 import java.util.List;
 
 import com.example.tasktracker.entity.Task;
-import com.example.tasktracker.entity.User;
 
 public interface TaskService {
 
@@ -16,6 +15,8 @@ public interface TaskService {
 	void updateDescription(Long taskId, String description);
 	
 	void updateIsFinished(Long taskId, Boolean isFinished);
+
+	void markAsDeleted(Long taskId);
 	
 	void delete(Long taskId);
 }
