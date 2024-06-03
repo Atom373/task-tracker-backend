@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.tasktracker.api.entity.Task;
+import com.example.tasktracker.domain.entity.Task;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

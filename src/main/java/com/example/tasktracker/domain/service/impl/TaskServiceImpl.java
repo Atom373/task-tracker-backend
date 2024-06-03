@@ -1,12 +1,12 @@
-package com.example.tasktracker.api.service.impl;
+package com.example.tasktracker.domain.service.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.example.tasktracker.api.entity.Task;
-import com.example.tasktracker.api.repository.TaskRepository;
-import com.example.tasktracker.api.service.TaskService;
+import com.example.tasktracker.domain.entity.Task;
+import com.example.tasktracker.domain.repository.TaskRepository;
+import com.example.tasktracker.domain.service.TaskService;
 import com.example.tasktracker.security.entity.User;
 import com.example.tasktracker.security.service.UserService;
 

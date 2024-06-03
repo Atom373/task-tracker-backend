@@ -1,4 +1,4 @@
-package com.example.tasktracker.api.controller;
+package com.example.tasktracker.domain.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.tasktracker.api.entity.Task;
-import com.example.tasktracker.api.service.TaskService;
+import com.example.tasktracker.domain.entity.Task;
+import com.example.tasktracker.domain.service.TaskService;
 
 import lombok.AllArgsConstructor;
 

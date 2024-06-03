@@ -1,8 +1,8 @@
-package com.example.tasktracker.api.service;
+package com.example.tasktracker.domain.service;
 
 import java.util.List;
 
-import com.example.tasktracker.api.entity.Task;
+import com.example.tasktracker.domain.entity.Task;
 
 public interface TaskService {
 

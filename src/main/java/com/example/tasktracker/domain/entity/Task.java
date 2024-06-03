@@ -1,4 +1,4 @@
-package com.example.tasktracker.api.entity;
+package com.example.tasktracker.domain.entity;
 
 import com.example.tasktracker.security.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
