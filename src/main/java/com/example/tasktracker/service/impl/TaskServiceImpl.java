@@ -34,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
 		task.setIsFinished(false);
 		task.setUser(user);
 		task.setIsDeleted(false);
+		task.setWasFinishedToday(false);
 		
 		return taskRepo.save(task);
 	}
@@ -62,6 +63,10 @@ public class TaskServiceImpl implements TaskService {
 		Task task = taskRepo.findById(taskId).orElseThrow( () -> new RuntimeException() );
 		
 		task.setIsFinished(isFinished);
+		
+		if (isFinished) {
+			task.setWasFinishedToday(true);
+		}
 		
 		taskRepo.save(task);
 	}

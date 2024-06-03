@@ -27,4 +27,5 @@ public class Task {
 	private User user;
 	
 	private Boolean isDeleted;
+	private Boolean wasFinishedToday;
 }
