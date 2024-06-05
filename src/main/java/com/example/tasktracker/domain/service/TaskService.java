@@ -3,10 +3,13 @@ package com.example.tasktracker.domain.service;
 import java.util.List;
 
 import com.example.tasktracker.domain.entity.Task;
+import com.example.tasktracker.security.entity.User;
 
 public interface TaskService {
 
 	List<Task> findAllByUserId(Long userId);
+	
+	List<Task> findAllByUser(User user);
 	
 	Task saveTaskWithTitle(String title, Long userId);
 	

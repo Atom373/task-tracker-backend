@@ -1,5 +1,7 @@
 package com.example.tasktracker.security.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.example.tasktracker.security.entity.User;
@@ -31,5 +33,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByEmail(String email) {
 		return userRepo.findByEmail(email);
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepo.findAll();
 	}
 }

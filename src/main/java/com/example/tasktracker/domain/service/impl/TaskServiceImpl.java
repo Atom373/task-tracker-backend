@@ -24,7 +24,12 @@ public class TaskServiceImpl implements TaskService {
 		User user = userService.findById(userId);
 		return taskRepo.findAllByUser(user);
 	}
-
+	
+	@Override
+	public List<Task> findAllByUser(User user) {
+		return taskRepo.findAllByUser(user);
+	}
+	
 	@Override
 	public Task saveTaskWithTitle(String title, Long userId) {
 		User user = userService.findById(userId);
