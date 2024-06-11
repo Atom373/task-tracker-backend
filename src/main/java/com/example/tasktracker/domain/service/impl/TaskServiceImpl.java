@@ -8,21 +8,24 @@ import com.example.tasktracker.domain.entity.Task;
 import com.example.tasktracker.domain.repository.TaskRepository;
 import com.example.tasktracker.domain.service.TaskService;
 import com.example.tasktracker.security.entity.User;
-import com.example.tasktracker.security.service.UserService;
 
-import lombok.AllArgsConstructor;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-	private TaskRepository taskRepo;
-	private UserService userService;
+	@PersistenceContext
+    private EntityManager entityManager;
+	
+	private final TaskRepository taskRepo;
 	
 	@Override
 	public List<Task> findAllByUserId(Long userId) {
-		User user = userService.findById(userId);
-		return taskRepo.findAllByUser(user);
+		User userReference = entityManager.getReference(User.class, userId);
+		return taskRepo.findAllByUser(userReference);
 	}
 	
 	@Override
@@ -32,12 +35,12 @@ public class TaskServiceImpl implements TaskService {
 	
 	@Override
 	public Task saveTaskWithTitle(String title, Long userId) {
-		User user = userService.findById(userId);
+		User userReference = entityManager.getReference(User.class, userId);
 		
 		Task task = new Task();
 		task.setTitle(title);
 		task.setIsFinished(false);
-		task.setUser(user);
+		task.setUser(userReference);
 		task.setIsDeleted(false);
 		task.setWasFinishedToday(false);
 		
@@ -88,5 +91,10 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public void delete(Long taskId) {
 		taskRepo.deleteById(taskId);
+	}
+
+	@Override
+	public void deleteAll(Iterable<Task> tasks) {
+		taskRepo.deleteAll(tasks);
 	}
 }

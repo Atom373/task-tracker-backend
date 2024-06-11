@@ -22,4 +22,6 @@ public interface TaskService {
 	void markAsDeleted(Long taskId);
 	
 	void delete(Long taskId);
+	
+	void deleteAll(Iterable<Task> tasks);
 }
