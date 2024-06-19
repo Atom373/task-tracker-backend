@@ -9,8 +9,6 @@ public interface TaskService {
 
 	List<Task> findAllByUserId(Long userId);
 	
-	List<Task> findAllByUser(User user);
-	
 	Task saveTaskWithTitle(String title, Long userId);
 	
 	void updateTitle(Long taskId, String title);
@@ -20,8 +18,4 @@ public interface TaskService {
 	void updateIsFinished(Long taskId, Boolean isFinished);
 
 	void markAsDeleted(Long taskId);
-	
-	void delete(Long taskId);
-	
-	void deleteAll(Iterable<Task> tasks);
 }

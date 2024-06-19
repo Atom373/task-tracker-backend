@@ -1,5 +1,6 @@
 package com.example.tasktracker.domain.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -25,12 +26,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<Task> findAllByUserId(Long userId) {
 		User userReference = entityManager.getReference(User.class, userId);
-		return taskRepo.findAllByUser(userReference);
-	}
-	
-	@Override
-	public List<Task> findAllByUser(User user) {
-		return taskRepo.findAllByUser(user);
+		return taskRepo.findAllByUserAndIsDeletedIsFalse(userReference);
 	}
 	
 	@Override
@@ -42,7 +38,7 @@ public class TaskServiceImpl implements TaskService {
 		task.setIsFinished(false);
 		task.setUser(userReference);
 		task.setIsDeleted(false);
-		task.setWasFinishedToday(false);
+		task.setFinishingDate(null);
 		
 		return taskRepo.save(task);
 	}
@@ -71,10 +67,7 @@ public class TaskServiceImpl implements TaskService {
 		Task task = taskRepo.findById(taskId).orElseThrow( () -> new RuntimeException() );
 		
 		task.setIsFinished(isFinished);
-		
-		if (isFinished) {
-			task.setWasFinishedToday(true);
-		}
+		task.setFinishingDate(LocalDate.now());
 		
 		taskRepo.save(task);
 	}
@@ -86,15 +79,5 @@ public class TaskServiceImpl implements TaskService {
 		task.setIsDeleted(true);
 		
 		taskRepo.save(task);
-	}
-	
-	@Override
-	public void delete(Long taskId) {
-		taskRepo.deleteById(taskId);
-	}
-
-	@Override
-	public void deleteAll(Iterable<Task> tasks) {
-		taskRepo.deleteAll(tasks);
 	}
 }

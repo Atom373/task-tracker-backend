@@ -9,5 +9,5 @@ import com.example.tasktracker.security.entity.User;
 
 public interface TaskRepository extends CrudRepository<Task, Long> {
 
-	List<Task> findAllByUser(User user);
+	List<Task> findAllByUserAndIsDeletedIsFalse(User user);
 }

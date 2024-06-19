@@ -1,5 +1,7 @@
 package com.example.tasktracker.domain.entity;
 
+import java.time.LocalDate;
+
 import com.example.tasktracker.security.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,5 +30,5 @@ public class Task {
 	private User user;
 	
 	private Boolean isDeleted;
-	private Boolean wasFinishedToday;
+	private LocalDate finishingDate;
 }
