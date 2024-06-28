@@ -18,10 +18,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name="users")
+@EqualsAndHashCode
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 6317600995380184053L;

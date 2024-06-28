@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.example.tasktracker.security.exception.UserAlreadyExistsException;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class SecurityExceptionsHandler {
 
 	@ExceptionHandler(UserAlreadyExistsException.class)
 	public ResponseEntity<String> userAlreadyExists(Exception ex) {
