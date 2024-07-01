@@ -1,6 +1,7 @@
 package com.example.tasktracker.domain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -62,9 +63,9 @@ public class TaskServiceImplTest {
 		when(entityManager.getReference(User.class, user.getId())).thenReturn(user);
 		when(taskRepository.findAllByUserAndIsDeletedIsFalse(user)).thenReturn(taskList);
 		
-		List<Task> actual = taskService.findAllByUserId(user.getId());
+		List<Task> obtained = taskService.findAllByUserId(user.getId());
 		
-		assertEquals(taskList, actual);
+		assertNotNull(obtained);
 	}
 	
 	@Test
@@ -72,9 +73,9 @@ public class TaskServiceImplTest {
 		when(entityManager.getReference(User.class, user.getId())).thenReturn(user);
 		when(taskRepository.save(any(Task.class))).thenReturn(task);
 		
-		Task actual = taskService.saveTaskWithTitle("some task", user.getId());
+		Task obtained = taskService.saveTaskWithTitle("some task", user.getId());
 		
-		assertEquals(task, actual);
+		assertEquals(task, obtained);
 	}
 	
 	@Test

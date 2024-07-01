@@ -11,8 +11,10 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.Setter;
 
 @Component
+@Setter
 public class JwtUtil {
 	
 	@Value("${jwt.secret}")

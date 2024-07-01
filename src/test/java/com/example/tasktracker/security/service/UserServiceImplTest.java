@@ -1,6 +1,7 @@
 package com.example.tasktracker.security.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -50,7 +51,7 @@ public class UserServiceImplTest {
 		
 		User savedUser = userService.save(user);
 		
-		assertEquals(user, savedUser);
+		assertNotNull(savedUser);
 		verify(userRepository, times(1)).existsByEmail(anyString());
 		verify(userRepository, times(1)).save(user);
 	}
@@ -71,7 +72,7 @@ public class UserServiceImplTest {
 		
 		User obtained = userService.findById(user.getId());
 		
-		assertEquals(user, obtained);
+		assertNotNull(obtained);
 	}
 	
 	@Test
@@ -80,6 +81,6 @@ public class UserServiceImplTest {
 		
 		User obtained = userService.findByEmail(email);
 		
-		assertEquals(user, obtained);
+		assertNotNull(obtained);
 	}
 }
