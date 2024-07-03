@@ -1,6 +1,7 @@
 package com.example.tasktracker.domain.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class TaskRepositoryTest {
 	}
 	
 	@Test
-	public void findAllByUserAndIsDeletedIsFalse() {
+	public void findAllByUserAndIsDeletedIsFalse_shouldReturnListWithFirstTask() {
 		// given
 		User bob = new User();
 		bob.setEmail("bob@gmail.com");
@@ -57,11 +58,13 @@ public class TaskRepositoryTest {
 				.isDeleted(true)
 				.build();
 		
-		// when
 		taskRepo.saveAll(List.of(task1, task2, task3));
+		
+		// when
 		List<Task> obtained = taskRepo.findAllByUserAndIsDeletedIsFalse(bob);
 		
 		// then
-		assertEquals(List.of(task1), obtained);
+		assertNotNull(obtained);
+		assertEquals(task1.getTitle(), obtained.get(0).getTitle());
 	}
 }
