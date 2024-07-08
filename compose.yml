@@ -13,6 +13,7 @@ services:
 
   frontend:
     image: task-tracker-frontend
+    container_name: frontend
     ports:
       - "80:80"
     depends_on:
