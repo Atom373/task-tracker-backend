@@ -1,0 +1,70 @@
+version: "1.0"
+
+services:
+  backend:
+    image: task-tracker-backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      TASK_TRACKER_DATABASE_HOST: postgres
+
+  frontend:
+    image: task-tracker-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  scheduler:
+    image: task-tracker-scheduler
+    container_name: scheduler
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      TASK_TRACKER_DATABASE_HOST: postgres
+      TASK_TRACKER_RABBITMQ_HOST: rabbitmq
+
+  email-sender:
+    image: task-tracker-email-sender
+    container_name: email-sender
+    depends_on:
+      - rabbitmq
+    environment:
+      TASK_TRACKER_RABBITMQ_HOST: rabbitmq
+      MG_DOMAIN: ${MG_DOMAIN}
+      MG_API_KEY: ${MG_API_KEY}
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${TASK_TRACKER_DATABASE_NAME:-task_tracker}
+      POSTGRES_USER: ${TASK_TRACKER_DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${TASK_TRACKER_DATABASE_PASSWORD:-1234}
+
+  rabbitmq:
+    image: rabbitmq:3.13-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${TASK_TRACKER_RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${TASK_TRACKER_RABBITMQ_PASSWORD:-guest}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_logs:/var/log/rabbitmq
+
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+  rabbitmq_logs:

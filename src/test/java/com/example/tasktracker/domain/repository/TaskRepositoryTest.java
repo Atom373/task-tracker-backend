@@ -1,4 +1,4 @@
-package com.example.tasktracker.domain.repository;
+ package com.example.tasktracker.domain.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -36,8 +36,8 @@ public class TaskRepositoryTest {
 		bob.setPassword("1234");
 		
 		User sam = new User();
-		bob.setEmail("sam@gmail.com");
-		bob.setPassword("1234");
+		sam.setEmail("sam@gmail.com");
+		sam.setPassword("1234");
 		
 		userRepo.save(bob);
 		userRepo.save(sam);
