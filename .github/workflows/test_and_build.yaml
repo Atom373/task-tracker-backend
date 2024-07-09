@@ -1,4 +1,4 @@
-name: pastebin app CI
+name: task tracker backend api CI
 
 on:
   pull_request:
