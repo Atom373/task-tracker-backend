@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,32 +31,32 @@ public class TaskController {
 		return ResponseEntity.ok(tasks);
 	}
 	
-	@PostMapping("/create")
+	@PostMapping
 	public ResponseEntity<Long> saveTask(@RequestParam String title,
 										 @AuthenticationPrincipal Long userId) {
 		Task createdTask = taskService.saveTaskWithTitle(title, userId);
 		return new ResponseEntity<>(createdTask.getId(), HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/update/title")
+	@PatchMapping("/title")
 	public void updateTitle(@RequestParam Long taskId, 
 							@RequestParam String title) {
 		taskService.updateTitle(taskId, title);
 	}
 	
-	@PostMapping("/update/description")
+	@PatchMapping("/description")
 	public void updateDescription(@RequestParam Long taskId, 
 								  @RequestParam String description) {
 		taskService.updateDescription(taskId, description);
 	}
 	
-	@PostMapping("/update/isfinished")
+	@PatchMapping("/is-finished")
 	public void updateState(@RequestParam Long taskId,
 							@RequestParam Boolean isFinished) {
 		taskService.updateIsFinished(taskId, isFinished);
 	}
 	
-	@PostMapping("/delete")
+	@DeleteMapping
 	public void deleteTask(@RequestParam Long taskId) {
 		taskService.markAsDeleted(taskId);
 	}
