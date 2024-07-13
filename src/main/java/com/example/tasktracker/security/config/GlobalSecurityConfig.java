@@ -56,7 +56,8 @@ public class GlobalSecurityConfig {
 				.csrf( csrf -> csrf.disable()
 				)
 				.authorizeHttpRequests( requests -> requests
-						.requestMatchers("/api/auth", "/api/register").permitAll()
+						.requestMatchers("/api/auth", "/api/register", 
+										 "/swagger-ui/**", "/v3/api-docs/**", "/openapi.yml").permitAll()
 						.anyRequest().authenticated()
 				)
 				.sessionManagement( sessionManagement -> sessionManagement

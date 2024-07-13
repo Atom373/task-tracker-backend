@@ -17,3 +17,7 @@ spring:
   sql:
     init:
       mode: always
+      
+springdoc:
+  swagger-ui:
+    url: /openapi.yml

@@ -2,11 +2,14 @@ package com.example.tasktracker.domain.it;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -99,7 +102,7 @@ public class TaskControllerTest {
     	String newTaskTitle = "new task";
     	
     	// when
-    	MvcResult result = mockMvc.perform(post("/api/task/create")
+    	MvcResult result = mockMvc.perform(post("/api/task")
     			.header("Authorization", "Bearer " + jwt)
     			.param("title", newTaskTitle))
     		.andExpect(status().isCreated())
@@ -122,7 +125,7 @@ public class TaskControllerTest {
     	Long taskToUpdateId = tasks.get(0).getId(); 
     	
     	// when
-    	mockMvc.perform(post("/api/task/update/title")
+    	mockMvc.perform(patch("/api/task/title")
     			.header("Authorization", "Bearer " + jwt)
     			.param("taskId", taskToUpdateId.toString())
     			.param("title", updatedTitle));
@@ -141,7 +144,7 @@ public class TaskControllerTest {
     	Long taskToUpdateId = tasks.get(0).getId(); 
     	
     	// when
-    	mockMvc.perform(post("/api/task/update/description")
+    	mockMvc.perform(patch("/api/task/description")
     			.header("Authorization", "Bearer " + jwt)
     			.param("taskId", taskToUpdateId.toString())
     			.param("description", updatedDescription));
@@ -160,7 +163,7 @@ public class TaskControllerTest {
     	Long taskToUpdateId = tasks.get(0).getId(); 
     	
     	//when
-    	mockMvc.perform(post("/api/task/update/isfinished")
+    	mockMvc.perform(patch("/api/task/is-finished")
     			.header("Authorization", "Bearer " + jwt)
     			.param("taskId", taskToUpdateId.toString())
     			.param("isFinished", updatedState.toString()));
@@ -170,6 +173,7 @@ public class TaskControllerTest {
     	
     	assertNotNull(obtained);
     	assertEquals(updatedState, obtained.getIsFinished());
+    	assertEquals(LocalDate.now(), obtained.getFinishingDate());
     }
     
     @Test
@@ -178,7 +182,7 @@ public class TaskControllerTest {
     	Long taskToUpdateId = tasks.get(0).getId(); 
     	
     	// when
-    	mockMvc.perform(post("/api/task/delete")
+    	mockMvc.perform(delete("/api/task")
     			.header("Authorization", "Bearer " + jwt)
     			.param("taskId", taskToUpdateId.toString()));
     	
