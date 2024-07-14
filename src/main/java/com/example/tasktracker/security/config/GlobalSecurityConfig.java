@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -53,8 +54,8 @@ public class GlobalSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-				.csrf( csrf -> csrf.disable()
-				)
+				.csrf( csrf -> csrf.disable())
+				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests( requests -> requests
 						.requestMatchers("/api/auth", "/api/register", 
 										 "/swagger-ui/**", "/v3/api-docs/**", "/openapi.yml").permitAll()

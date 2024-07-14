@@ -172,6 +172,7 @@ public class TaskControllerTest {
     	Task obtained = taskRepository.findById(taskToUpdateId).orElse(null);
     	
     	assertNotNull(obtained);
+    	assertNotNull(obtained.getFinishingDate());
     	assertEquals(updatedState, obtained.getIsFinished());
     	assertEquals(LocalDate.now(), obtained.getFinishingDate());
     }
@@ -179,15 +180,15 @@ public class TaskControllerTest {
     @Test
     public void deleteTask() throws Exception {
     	// given
-    	Long taskToUpdateId = tasks.get(0).getId(); 
+    	Long taskToDeleteId = tasks.get(0).getId(); 
     	
     	// when
     	mockMvc.perform(delete("/api/task")
     			.header("Authorization", "Bearer " + jwt)
-    			.param("taskId", taskToUpdateId.toString()));
+    			.param("taskId", taskToDeleteId.toString()));
     	
     	// then
-    	Task obtained = taskRepository.findById(taskToUpdateId).orElse(null);
+    	Task obtained = taskRepository.findById(taskToDeleteId).orElse(null);
     	
     	assertNotNull(obtained);
     	assertEquals(true, obtained.getIsDeleted());
