@@ -13,12 +13,12 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-            	registry.addMapping("/api/**")
-		                .allowedOrigins("*")
-		                .allowedMethods("GET", "PATCH", "POST", "PUT", "DELETE", "OPTIONS")
-		                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization")
-		                .allowCredentials(false)
-		                .maxAge(3600);
+                registry.addMapping("/api/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization")
+                        .allowCredentials(false)
+                        .maxAge(3600);
             }
         };
     }
