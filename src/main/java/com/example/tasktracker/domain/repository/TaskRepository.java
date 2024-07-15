@@ -16,22 +16,22 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
 	List<Task> findAllByUserAndIsDeletedIsFalse(User user);
 	
-	@Modifying
+	@Modifying(clearAutomatically = true)
 	@Transactional
     @Query(value = "UPDATE task SET title = :title WHERE id = :id", nativeQuery = true)
     void updateTitleById(@Param("id") Long id, @Param("title") String title);
 	
-	@Modifying
+	@Modifying(clearAutomatically = true)
 	@Transactional
     @Query(value = "UPDATE task SET description = :description WHERE id = :id", nativeQuery = true)
     void updateDescriptionById(@Param("id") Long id, @Param("description") String description);
 	
-	@Modifying
+	@Modifying(clearAutomatically = true)
 	@Transactional
     @Query(value = "UPDATE task SET is_finished = :isFinished, finishing_date = CURDATE() WHERE id = :id", nativeQuery = true)
     void updateIsFinishedById(@Param("id") Long id, @Param("isFinished") Boolean isFinished);
 	
-	@Modifying
+	@Modifying(clearAutomatically = true)
 	@Transactional
     @Query(value = "UPDATE task SET is_deleted = true WHERE id = :id", nativeQuery = true)
     void markAsDeletedById(@Param("id") Long id);

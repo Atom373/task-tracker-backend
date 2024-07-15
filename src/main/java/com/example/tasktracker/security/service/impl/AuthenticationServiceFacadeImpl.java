@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.tasktracker.security.dto.AuthenticationRequestDto;
 import com.example.tasktracker.security.entity.User;
@@ -24,6 +25,7 @@ public class AuthenticationServiceFacadeImpl implements AuthenticationServiceFac
 	private UserService userService;
 	
 	@Override
+	@Transactional(readOnly = true)
 	public String authenticate(AuthenticationRequestDto request) {
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
