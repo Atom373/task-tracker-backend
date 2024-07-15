@@ -13,5 +13,5 @@
 </p>
 <h3>Использованные технологии:</h3>
 <p>
-  Postgresql, JWT, Lombok, JUnit, Spring Boot, Spring Web, Spring Security, Spring Data Jpa.
+  Postgresql, JWT, Lombok, JUnit, Swagger, Liquibase, Spring Boot, Spring Web, Spring Security, Spring Data Jpa.
 </p>

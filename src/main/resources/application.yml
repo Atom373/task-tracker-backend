@@ -1,18 +1,18 @@
 jwt:
-  lifetime: 4h
+  lifetime: P1D
   secret: ${TASK_TRACKER_JWT_SECRET:lkjdf-pe9KJ0hkm1fls-L7K-la4IWlajPO0WE}
 
 spring:
   application:
     name: task-tracker
+  liquibase:
+    enabled: true         
   datasource:
     url: jdbc:postgresql://${TASK_TRACKER_DATABASE_HOST:localhost}:${TASK_TRACKER_DATABASE_PORT:5432}/${TASK_TRACKER_DATABASE_NAME:task_tracker}
     username: ${TASK_TRACKER_DATABASE_USERNAME:postgres}
     password: ${TASK_TRACKER_DATABASE_PASSWORD:1234}
     driver-class-name: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
     show-sql: true
   sql:
     init:
