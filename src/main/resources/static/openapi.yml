@@ -2,6 +2,8 @@ openapi: 3.0.1
 info:
   title: Task tracker API
   version: 1.0.0
+security:
+  - bearer-key: []
 servers:
 - url: http://localhost:8080
   description: test server
@@ -24,7 +26,7 @@ paths:
         '201':
           description: CREATED
           content:
-            application-json:
+            application/json:
               schema:
                 type: integer
                 format: int64
@@ -170,12 +172,17 @@ paths:
         '200':
           description: OK
           content:
-            application-json:
+            application/json:
               schema:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Task"
 components:
+  securitySchemes:
+    bearer-key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     RegistrationRequestDto:
       type: object
