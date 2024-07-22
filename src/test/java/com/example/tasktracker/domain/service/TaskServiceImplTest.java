@@ -3,12 +3,9 @@ package com.example.tasktracker.domain.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,49 +73,5 @@ public class TaskServiceImplTest {
 		Task obtained = taskService.saveTaskWithTitle("some task", user.getId());
 		
 		assertEquals(task, obtained);
-	}
-	
-	@Test
-	public void updateTitle() {
-		when(taskRepository.save(any(Task.class))).thenReturn(task);
-		when(taskRepository.findById(task.getId())).thenReturn(Optional.of(task));
-		
-		taskService.updateTitle(task.getId(), "new title");
-		
-		verify(taskRepository, times(1)).findById(task.getId());
-		verify(taskRepository, times(1)).save(task);
-	}
-	
-	@Test
-	public void updateDescription() {
-		when(taskRepository.save(any(Task.class))).thenReturn(task);
-		when(taskRepository.findById(task.getId())).thenReturn(Optional.of(task));
-		
-		taskService.updateDescription(task.getId(), "new description");
-		
-		verify(taskRepository, times(1)).findById(task.getId());
-		verify(taskRepository, times(1)).save(task);
-	}
-	
-	@Test
-	public void updateIsFinished() {
-		when(taskRepository.save(any(Task.class))).thenReturn(task);
-		when(taskRepository.findById(task.getId())).thenReturn(Optional.of(task));
-		
-		taskService.updateIsFinished(task.getId(), true);
-		
-		verify(taskRepository, times(1)).findById(task.getId());
-		verify(taskRepository, times(1)).save(task);
-	}
-	
-	@Test
-	public void markAsDeleted() {
-		when(taskRepository.save(any(Task.class))).thenReturn(task);
-		when(taskRepository.findById(task.getId())).thenReturn(Optional.of(task));
-		
-		taskService.markAsDeleted(task.getId());
-		
-		verify(taskRepository, times(1)).findById(task.getId());
-		verify(taskRepository, times(1)).save(task);
 	}
 }

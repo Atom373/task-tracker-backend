@@ -1,6 +1,5 @@
 package com.example.tasktracker.domain.service.impl;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -43,38 +42,21 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void updateTitle(Long taskId, String title) {
-		Task task = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException());
-
-		task.setTitle(title);
-
-		taskRepo.save(task);
+		taskRepo.updateTitleById(taskId, title);
 	}
 
 	@Override
 	public void updateDescription(Long taskId, String description) {
-		Task task = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException());
-
-		task.setDescription(description);
-
-		taskRepo.save(task);
+		taskRepo.updateDescriptionById(taskId, description);
 	}
 
 	@Override
 	public void updateIsFinished(Long taskId, Boolean isFinished) {
-		Task task = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException());
-
-		task.setIsFinished(isFinished);
-		task.setFinishingDate(LocalDate.now());
-
-		taskRepo.save(task);
+		taskRepo.updateIsFinishedById(taskId, isFinished);
 	}
 
 	@Override
 	public void markAsDeleted(Long taskId) {
-		Task task = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException());
-
-		task.setIsDeleted(true);
-
-		taskRepo.save(task);
+		taskRepo.markAsDeletedById(taskId);
 	}
 }
