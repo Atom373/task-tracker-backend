@@ -29,6 +29,11 @@ public class RegistrationServiceFacadeImpl implements RegistrationServiceFacade 
 		return jwtUtil.generateToken(user.getId());
 	}
 
+	@Override
+	public long getExpirationTime() {
+		return jwtUtil.getExpirationTime();
+	}
+	
 	private void encodeUsersPassword(User user) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);

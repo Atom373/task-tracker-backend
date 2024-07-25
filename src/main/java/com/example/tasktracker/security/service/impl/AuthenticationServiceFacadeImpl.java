@@ -39,4 +39,8 @@ public class AuthenticationServiceFacadeImpl implements AuthenticationServiceFac
 		return jwt;
 	}
 
+	@Override
+	public long getExpirationTime() {
+		return jwtUtil.getExpirationTime();
+	}
 }

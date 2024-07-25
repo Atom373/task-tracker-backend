@@ -1,5 +1,5 @@
 jwt:
-  lifetime: P1D
+  lifetime: P30D
   secret: ${TASK_TRACKER_JWT_SECRET:lkjdf-pe9KJ0hkm1fls-L7K-la4IWlajPO0WE}
 
 spring:

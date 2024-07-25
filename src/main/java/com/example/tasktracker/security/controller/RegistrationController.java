@@ -22,6 +22,7 @@ public class RegistrationController {
 	@PostMapping("/register")
 	public ResponseEntity<RegistrationResponseDto> register(@RequestBody RegistrationRequestDto dto) {
 		String jwt = registrationService.register(dto);
-		return ResponseEntity.ok(new RegistrationResponseDto(jwt));
+		long expirationTime = registrationService.getExpirationTime();
+		return ResponseEntity.ok(new RegistrationResponseDto(jwt, expirationTime));
 	}
 }

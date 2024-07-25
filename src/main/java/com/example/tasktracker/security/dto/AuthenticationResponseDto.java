@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponseDto {
 
 	private String jwt;
+	private long expirationTime;
 }

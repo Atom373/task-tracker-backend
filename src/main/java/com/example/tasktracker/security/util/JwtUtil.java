@@ -1,6 +1,7 @@
 package com.example.tasktracker.security.util;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import lombok.Setter;
+import lombok.Getter;
 
 @Component
-@Setter
+@Getter
 public class JwtUtil {
 	
 	@Value("${jwt.secret}")
@@ -29,7 +30,7 @@ public class JwtUtil {
 		return Jwts.builder()
 				.setClaims(claims)
 				.setIssuedAt(new Date())
-				.setExpiration(new Date(new Date().getTime() + lifetime.toMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + lifetime.toMillis()))
 				.signWith(Keys.hmacShaKeyFor(secret.getBytes()))
 				.compact();
 	}
@@ -44,5 +45,9 @@ public class JwtUtil {
 				.build()
 				.parseClaimsJws(token)
 				.getBody();
+	}
+	
+	public long getExpirationTime() {
+		return Instant.now().getEpochSecond() + lifetime.getSeconds() - 1;
 	}
 }

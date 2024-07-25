@@ -22,6 +22,7 @@ public class AuthController {
 	@PostMapping("/auth")
 	public ResponseEntity<AuthenticationResponseDto> generateToken(@RequestBody AuthenticationRequestDto request){
 		String jwt = authenticationService.authenticate(request);
-		return ResponseEntity.ok(new AuthenticationResponseDto(jwt));
+		long expirationTime = authenticationService.getExpirationTime();
+		return ResponseEntity.ok(new AuthenticationResponseDto(jwt, expirationTime));
 	}
 }
