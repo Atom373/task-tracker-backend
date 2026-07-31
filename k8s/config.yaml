@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: task-tracker
+data:
+  TASK_TRACKER_DATABASE_HOST: postgres.task-tracker.svc.cluster.local
+  TASK_TRACKER_DATABASE_PORT: "5432"
+  TASK_TRACKER_RABBITMQ_HOST: rabbitmq.task-tracker.svc.cluster.local
+  TASK_TRACKER_RABBITMQ_PORT: "5672"
+  BACKEND_HOST: backend.task-tracker.svc.cluster.local
+  BACKEND_PORT: "8080"

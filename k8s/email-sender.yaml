@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-sender
+  namespace: task-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email-sender
+  template:
+    metadata:
+      labels:
+        app: email-sender
+    spec:
+      containers:
+        - name: email-sender
+          image: docker.io/atom373/task-tracker-email-sender:1.0.0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: rabbitmq-secret
+            - secretRef:
+                name: mailgun-secret
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "echo 'ready'"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "echo 'alive'"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-sender
+  namespace: task-tracker
+spec:
+  selector:
+    app: email-sender
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP
